@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Uni-O4: Unifying Online and Offline Deep Reinforcement Learning with Multi-Step On-Policy Optimization">
+  <meta name="keywords" content="Offline-to-Online Fine-tuning, On-policy Learning, Robot Learning, Reinforcement Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Stable and Energy-Efficient Locomotion for Quadruped Robots via Hierarchical Reinforcement Learning</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/bulma.min.css">
+  <link rel="stylesheet" href="assets/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="assets/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="assets/js/fontawesome.all.min.js"></script>
+  <script src="assets/js/bulma-carousel.min.js"></script>
+  <script src="assets/js/bulma-slider.min.js"></script>
+  <script src="assets/js/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <link rel="icon" href="assets/favicon.ico">
+
+  <meta property="og:site_name" content="Hierarchical Reinforcement Learning for Energy-Efficient and Stable Quadruped Locomotion" />
+</head>
+
+
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Learning Stable and Energy-Efficient Locomotion for Quadruped Robots via Hierarchical Reinforcement Learning</h1>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .center-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh; 
+  }
+
+  .center-table table {
+    text-align: center; 
+  }
+
+  .center-table table td {
+    vertical-align: middle; /* 垂直居中表格单元格内的内容 */
+  }
+</style>
+<div class="center-table">
+<table class="authors">
+  <tbody>
+    <tr>
+      <td>
+        <h4>
+          <span class="authors">
+          <a href="https://anubhav1772.github.io/AboutMe/" style="font-weight: bold;">Singh Anubhav</a><sup>12</sup>
+        </span>
+        <span class="authors-affiliation">
+          <br>
+          <sup>1</sup>National Research University ITMO &nbsp;
+          <sup>2</sup>Biomechatronics and Energy-Efficient Robotics Lab (BE2R) &nbsp;
+        </span>
+        </h4>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+\<br>
+\<br>
+<div class="center-table">
+<div class="links" style="margin-top:-1.5%;">
+  <!-- <a href="#" class="btn"><i class="ai ai-arxiv"></i>&nbsp;&nbsp;arXiv</a> &nbsp; -->
+  <!-- <a href="#" class="btn"><svg class="svg-inline--fa fa-file-pdf fa-w-12 fa-lg" style="width: 18px; height: 18px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 500" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>&nbsp;&nbsp;Paper</a>&nbsp;&nbsp; -->
+  <a href="https://github.com/anubhav1772/unio4-efficient-aliengo" class="btn"><svg class="svg-inline--fa fa-github fa-w-16" style="width: 18px; height: 18px;" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 -50 484 500" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>&nbsp;&nbsp;Code</a> &nbsp;
+  <!-- <a href="#" class="btn">
+    <i class="fab fa-twitter"></i>&nbsp;&nbsp;Twitter
+  </a> -->
+</div>
+</div>
+
+<div class="column is-full-width is-centered has-text-centered">
+  <video controls autoplay loop muted playsinline src="./resources/video/main_video_v3.mp4" poster="./resources/loading-icon.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 45%"></video>
+</div>
+<br>
+
+<section class="section">
+  <div class="container">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-2">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Learning locomotion policies for quadruped robots that are both <b>stable</b> and <b>energy-efficient</b> remains a challenging problem due to the long-horizon nature of gait optimization and the need for robust real-time stabilization under disturbances. In this project, we propose a <span style="color: rgb(128, 185, 90);font-weight: bolder;">hierarchical reinforcement learning (HRL)</span> framework that decomposes quadruped locomotion into complementary high-level and low-level control objectives. The <span style="color: rgb(128, 185, 90);font-weight: bolder;">high-level policy (HLL)</span> operates at a lower temporal frequency and focuses on energy-efficient gait generation and gait transition, selecting locomotion primitives and reference motion parameters that minimize energy consumption while adapting to task and terrain variations. The <span style="color: rgb(128, 185, 90);font-weight: bolder;">low-level policy (LL)</span> runs at a higher control frequency and is responsible for stability, balance, and precise locomotion execution, tracking the high-level commands while ensuring robustness to modeling errors and external perturbations.</p>
+
+            <p>The proposed hierarchy enables efficient exploration in the high-level policy space while constraining low-level behavior to dynamically feasible and stable motions. Training is performed in simulation using reinforcement learning, with carefully designed reward structures that decouple long-horizon energy objectives from short-horizon stability constraints. Experimental results in simulation demonstrate that the hierarchical approach achieves <b>lower energy consumption</b>, <b>smoother gait transitions</b>, and <b>improved robustness</b> compared to monolithic reinforcement learning baselines. This work highlights the effectiveness of hierarchical policy decomposition for scalable and reliable quadruped locomotion and provides a foundation for future sim-to-real transfer and deployment on real-world robotic platforms.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<section class="section">
+  <div class="container">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+        <div class="column has-text-centered">
+<!--       <div class="column is-two-thirds"> -->
+        <h2 class="title is-2">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+                We present a hierarchical reinforcement learning framework for achieving stable and energy-efficient locomotion in a quadruped robot. The system decomposes control into a <span style="color: rgb(128, 185, 90);font-weight: bolder;">High-Level (HL) gait modulation policy</span> and a <span style="color: rgb(128, 185, 90);font-weight: bolder;">Low-Level (LL) locomotion controller</span>. The HL operates in a low-dimensional, physically interpretable gait space and learns to modulate body posture, gait timing, inter-leg coordination, foot trajectories, and stance geometry based on commanded velocities and sensory feedback, with the objective of smooth gait transitions and reduced energy consumption. These abstract gait parameters are passed to a pre-trained LL policy, which is trained using PPO in Isaac Gym with domain randomization and temporal observation history to ensure robust and dynamically consistent execution. The LL controller converts gait parameters into joint position targets and subsequently into joint torques via a PD controller, guaranteeing stability and sim-to-real transferability. During HL training, the LL policy is frozen, allowing the HL to focus on energy-efficient gait generation while the LL maintains joint-level stability, resulting in a scalable, robust, and transferable locomotion system for the Aliengo quadruped.
+          </p>
+        </div>
+        <!-- <div style="text-align: center;">
+          <figure style="display: inline-block; max-width: 75%;">
+            <img src="resources/video/pipeline_gif.gif" alt="Pipeline Image" style="max-width: 150%;">
+            <figcaption>Pipeline of the hierarchial settings for plcolicy training.</figcaption>
+          </figure>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+  
+<section class="section">
+  <div class="container">
+    <h2 class="title is-2" style="text-align: center;">Baseline Implementation</h2>
+    </br>
+        <!-- <div style="text-align: center;">
+          <figure style="display: inline-block; max-width: 75%;">
+            <img src="resources/video/real_robot_pipeline.png" alt="Pipeline Image" style="max-width: 100%;">
+            <figcaption>The workflow of <span style="color: rgb(128, 185, 90); font-weight: bolder;">Uni-O4</span> online-offline-online fine-tuning framework on real-world robots. </figcaption>
+          </figure>
+        </div>
+    <br> -->
+      <p style="text-align: center;">
+        All the below experiments were conducted by reproducing the <a href="https://arxiv.org/abs/2212.03238">Walk These Ways</a> paper for the Aliengo robot (originally implemented on the Go1 platform), incorporating numerous parameter modifications and enhancements over the original implementation. The evaluations were performed at 
+        <em>x</em><sub>vel</sub> = 1.0 m/s, 
+        <em>y</em><sub>vel</sub> = 0.0 m/s, 
+        <em>yaw</em><sub>vel</sub> = 0.0 rad/s, 
+        body height = 0.0, step frequency = 3.0 Hz,
+        foot swing height = 0.08 m, pitch = 0.0, roll = 0.0
+        <span style="font-size: 14px; text-shadow: 0 0 3px rgb(161, 66, 170);">&darr;</span>
+      </p>
+      <br>
+
+      <!-- <div class="column is-full-width is-centered has-text-centered">
+        <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/pronking.mp4" poster="assets/resources/real_world/gif/pronking.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 70%"></video>
+      </div> -->
+
+      <div class="columns is-centered">
+        <div class="column is-half has-text-centered">
+          <video controls autoplay loop muted playsinline
+            src="assets/resources/real_world/videos/pronking.mp4"
+            poster="assets/resources/real_world/gif/pronking.gif"
+            style="border: 1px solid #bbb; border-radius: 10px; width: 100%;">
+          </video>
+          <p><strong>Pronking</strong> Gait ([0, 0, 0])</p>
+        </div>
+
+        <div class="column is-half has-text-centered">
+          <video controls autoplay loop muted playsinline
+            src="assets/resources/real_world/videos/trotting.mp4"
+            poster="assets/resources/real_world/gif/trotting.gif"
+            style="border: 1px solid #bbb; border-radius: 10px; width: 100%;">
+          </video>
+          <p><strong>Trotting</strong> Gait ([0.5, 0, 0])</p>
+        </div>
+      </div>
+
+      <br>
+      <div class="columns is-centered">
+        <div class="column is-half has-text-centered">
+          <video controls autoplay loop muted playsinline
+            src="assets/resources/real_world/videos/pacing.mp4"
+            poster="assets/resources/real_world/gif/pacing.gif"
+            style="border: 1px solid #bbb; border-radius: 10px; width: 100%;">
+          </video>
+          <p><strong>Pacing</strong> Gait ([0, 0, 0.5])</p>
+        </div>
+
+        <div class="column is-half has-text-centered">
+          <video controls autoplay loop muted playsinline
+            src="assets/resources/real_world/videos/bounding.mp4"
+            poster="assets/resources/real_world/gif/bounding.gif"
+            style="border: 1px solid #bbb; border-radius: 10px; width: 100%;">
+          </video>
+          <p><strong>Bounding</strong> Gait ([0, 0.5, 0])</p>
+        </div>
+      </div>
+
+      <br>
+      <!-- <p style="text-align: center;"><strong>Online fine-tuned</strong> by <span style="color: rgb(128, 185, 90);font-weight: bolder;">Uni-O4</span> <em>VS.</em> <strong>sim2real baseline</strong> policy deployment with high speed <span style="font-size: 14px; text-shadow: 0 0 3px rgb(161, 66, 170);">&darr;</span></p> -->
+      <div class="column is-full-width is-centered has-text-centered">
+        <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/galloping.mp4" poster="assets/resources/real_world/gif/galloping.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 50%"></video>
+        <p><strong>Galloping</strong> Gait ([0.25, 0, 0])</p>
+      </div>
+      <br>
+      <p style="text-align: center;">
+        All experiments were conducted by reproducing the methodology proposed in 
+        <a href="https://arxiv.org/abs/2403.20001">Adaptive Energy Regularization for Autonomous Gait Transition and Energy-Efficient Quadruped Locomotion</a>, adapted to the Aliengo robot platform. 
+        While the original work demonstrates autonomous gait discovery through energy-centric reward shaping, our implementation fixes the gait to pronking and explicitly zeros out high-level gait modulation commands to isolate and evaluate energy-efficient locomotion behavior under a constrained control setting. 
+        The system was evaluated at 
+        <em>x</em><sub>vel</sub> = 1.0 m/s, 
+        <em>y</em><sub>vel</sub> = 0.0 m/s, 
+        <em>yaw</em><sub>vel</sub> = 0.0 rad/s, 
+        body height = 0.0, step frequency = 0.0 Hz, pronking gait, 
+        foot swing height = 0.0 m, pitch = 0.0, roll = 0.0, stance width = 0.0,
+        emphasizing energy-aware locomotion with minimal handcrafted gait biases.
+        <span style="font-size: 14px; text-shadow: 0 0 3px rgb(161, 66, 170);">&darr;</span>
+      </p>
+      <div class="column is-full-width is-centered has-text-centered">
+        <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/adaptive_energy_regularization.mp4" poster="assets/resources/real_world/gif/adaptive_energy_regularization.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 50%"></video>
+      </div>
+  </div>
+</section>
+<!-- 
+<section class="section">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+          <div class="column has-text-centered">
+          <h2 class="title is-2">Simulated Tasks</h2>
+          <div class="content has-text-justified">
+            <p>
+              For simulated tasks,<span style="color: rgb(128, 185, 90);font-weight: bolder;">Uni-O4</span> exhibits an integration of stability, consistency, and efficiency, eclipsing all baseline methods with its unified training scheme.
+              As shown in the figures below, <span style="color: rgb(128, 185, 90);font-weight: bolder;">Uni-O4</span> can provide a better initialization from offline compared with other baselines and then shows a stable and rapid online fine-tuning performance improvement.
+              For more results, please refer to our paper.
+              </p>
+          </div>
+          <div class="columns is-centered">
+            <div class="column is-full">
+              <figure class="image">
+                <img src="resources/video/head_lable.png" alt="First Image">
+              </figure>
+            </div>
+          </div>
+          <div class="columns is-centered">
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/pen-human-v1.PNG" alt="Second Image">
+              </figure>
+            </div>
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/hammer-human-v1.PNG" alt="Second Image">
+              </figure>
+            </div>
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/door-human-v1.PNG" alt="Second Image">
+              </figure>
+            </div>
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/walker2d-medium-v2.PNG" alt="Second Image">
+              </figure>
+            </div>
+            </div>
+            <div class="columns is-centered">
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/walker2d-medium-replay-v2.PNG" alt="Second Image">
+              </figure>
+            </div>
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/walker2d-medium-expert-v2.PNG" alt="Second Image">
+              </figure>
+            </div>
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/hopper-medium-v2.PNG" alt="Second Image">
+              </figure>
+            </div>
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/hopper-medium-replay-v2.PNG" alt="Second Image">
+              </figure>
+            </div>
+            </div>
+            <div class="columns is-centered">
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/hopper-medium-expert-v2.PNG" alt="Second Image">
+              </figure>
+            </div>
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/halfcheetah-medium-v2.PNG" alt="Second Image">
+              </figure>
+            </div>
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/halfcheetah-medium-replay-v2.PNG" alt="Second Image">
+              </figure>
+            </div>
+            <div class="column is-one-quarter">
+              <figure class="image">
+                <img src="resources/video/halfcheetah-medium-expert-v2.PNG" alt="Second Image">
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+</body>
+</html>
