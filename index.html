@@ -235,96 +235,64 @@
       </div>
   </div>
 </section>
-<!-- 
+
 <section class="section">
     <div class="container">
       <div class="columns is-centered has-text-centered">
           <div class="column has-text-centered">
           <h2 class="title is-2">Simulated Tasks</h2>
-          <div class="content has-text-justified">
-            <p>
-              For simulated tasks,<span style="color: rgb(128, 185, 90);font-weight: bolder;">Uni-O4</span> exhibits an integration of stability, consistency, and efficiency, eclipsing all baseline methods with its unified training scheme.
-              As shown in the figures below, <span style="color: rgb(128, 185, 90);font-weight: bolder;">Uni-O4</span> can provide a better initialization from offline compared with other baselines and then shows a stable and rapid online fine-tuning performance improvement.
-              For more results, please refer to our paper.
-              </p>
-          </div>
-          <div class="columns is-centered">
+          <!-- <div class="columns is-centered">
             <div class="column is-full">
               <figure class="image">
-                <img src="resources/video/head_lable.png" alt="First Image">
+                <img src="assets/resources/sim/diff_gait_eval.gif" alt="diff_gait_eval">
               </figure>
+            </div>
+          </div> -->
+
+          <div class="columns is-centered">
+            <div class="column is-half has-text-centered">
+              <video controls autoplay loop muted playsinline
+                src="assets/resources/sim/videos/diff_gait_eval.mp4"
+                poster="assets/resources/sim/gif/diff_gait_eval.gif"
+                style="border: 1px solid #bbb; border-radius: 10px; width: 100%;">
+              </video>
+            </div>
+
+            <div class="column is-half has-text-centered">
+              <figure class="image">
+                <img src="assets/resources/sim/graphs/cum_norm_energy.png" 
+                      style="border: 1px solid #bbb; border-radius: 10px; height: 300%; width: 100%;"
+                      alt="gait_graph">
+              </figure>
+              <p>Pronking gait is the most energy-efficient, followed by bounding and galloping gaits. Pacing gait based locomotion performed the worst out of all gaits.</p>
             </div>
           </div>
+          <br>
+          <p style="text-align: center;">
+            Below experiment is conducted in simulation, where the quadruped is commanded to track a continuously varying forward velocity. As the speed command increases, the learned policy autonomously switches between distinct contact patterns, resulting in smooth gait transitions without any explicit gait scheduling. The accompanying gait diagram illustrates how each leg’s stance and swing phases reorganize across time, demonstrating that the controller selects different gaits at different speeds to maintain stable and energy‑efficient locomotion.
+            <span style="font-size: 14px; text-shadow: 0 0 3px rgb(161, 66, 170);">&darr;</span>
+          </p>
+          <br>
           <div class="columns is-centered">
-            <div class="column is-one-quarter">
+            <div class="column is-half has-text-centered">
+              <video controls autoplay loop muted playsinline
+                src="assets/resources/sim/videos/adaptive_vary_lin_vel.mp4"
+                style="border: 1px solid #bbb; border-radius: 10px; width: 100%;">
+              </video>
+            </div>
+            <div class="column is-half has-text-centered">
               <figure class="image">
-                <img src="resources/video/pen-human-v1.PNG" alt="Second Image">
+                <img src="assets/resources/sim/graphs/1.5_0.0_env_0_gait_plot_200.png" 
+                      style="border: 1px solid #bbb; border-radius: 10px; height: 300%; width: 100%;"
+                      alt="gait_graph">
               </figure>
+              <p>Gait switching under different command velocities. The policy is generated when energy coefficient was set to 0.25. As the command velocity increases, the policy shows automatic gait transiiton.</p>
             </div>
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/hammer-human-v1.PNG" alt="Second Image">
-              </figure>
-            </div>
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/door-human-v1.PNG" alt="Second Image">
-              </figure>
-            </div>
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/walker2d-medium-v2.PNG" alt="Second Image">
-              </figure>
-            </div>
-            </div>
-            <div class="columns is-centered">
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/walker2d-medium-replay-v2.PNG" alt="Second Image">
-              </figure>
-            </div>
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/walker2d-medium-expert-v2.PNG" alt="Second Image">
-              </figure>
-            </div>
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/hopper-medium-v2.PNG" alt="Second Image">
-              </figure>
-            </div>
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/hopper-medium-replay-v2.PNG" alt="Second Image">
-              </figure>
-            </div>
-            </div>
-            <div class="columns is-centered">
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/hopper-medium-expert-v2.PNG" alt="Second Image">
-              </figure>
-            </div>
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/halfcheetah-medium-v2.PNG" alt="Second Image">
-              </figure>
-            </div>
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/halfcheetah-medium-replay-v2.PNG" alt="Second Image">
-              </figure>
-            </div>
-            <div class="column is-one-quarter">
-              <figure class="image">
-                <img src="resources/video/halfcheetah-medium-expert-v2.PNG" alt="Second Image">
-              </figure>
-            </div>
+          </div>
           </div>
         </div>
       </div>
-    </div>
-  </section> -->
+  </section>
 
 
 </body>
