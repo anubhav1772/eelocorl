@@ -213,7 +213,7 @@
       <br>
       <!-- <p style="text-align: center;"><strong>Online fine-tuned</strong> by <span style="color: rgb(128, 185, 90);font-weight: bolder;">Uni-O4</span> <em>VS.</em> <strong>sim2real baseline</strong> policy deployment with high speed <span style="font-size: 14px; text-shadow: 0 0 3px rgb(161, 66, 170);">&darr;</span></p> -->
       <div class="column is-full-width is-centered has-text-centered">
-        <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/galloping.mp4" poster="assets/resources/real_world/gif/galloping.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 50%"></video>
+        <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/galloping.mp4" poster="assets/resources/real_world/gif/galloping.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 100%"></video>
         <p><strong>Galloping</strong> Gait ([0.25, 0, 0])</p>
       </div>
       <br>
@@ -231,7 +231,7 @@
         <span style="font-size: 14px; text-shadow: 0 0 3px rgb(161, 66, 170);">&darr;</span>
       </p>
       <div class="column is-full-width is-centered has-text-centered">
-        <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/adaptive_energy_regularization.mp4" poster="assets/resources/real_world/gif/adaptive_energy_regularization.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 50%"></video>
+        <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/adaptive_energy_regularization.mp4" poster="assets/resources/real_world/gif/adaptive_energy_regularization.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 100%"></video>
       </div>
   </div>
 </section>
@@ -241,15 +241,17 @@
       <div class="columns is-centered has-text-centered">
           <div class="column has-text-centered">
           <h2 class="title is-2">Simulated Tasks</h2>
-          
-          
 
           <p style="text-align: center;">
-            The experiment below is conducted in simulation on flat terrain, where five quadruped robots execute different gait patterns under identical control and environmental conditions. Each robot is commanded to track a forward velocity of 1.0 m/s, a lateral velocity of 0.3 m/s, and zero yaw rate, differing only in the imposed gait coordination. The left panel visualizes the resulting locomotion behaviors, while the right panel presents the cumulative normalized energy consumption over the traveled distance. The results show a clear dependence of energy efficiency on gait choice, with pacing exhibiting the lowest energy consumption at this operating point, followed by trotting, galloping, bounding, and pronking.
+            The experiment below is conducted in simulation on flat terrain, where five quadruped robots execute different gait patterns under identical control and environmental conditions. 
+            
+            For each commanded forward velocity v<sub>x</sub>∈[0,1.8] m/s (10 evenly spaced values), five quadruped instances execute distinct, fixed gait patterns and are simulated for 500 steps. The mean cost of transport E/(mgd) over the steady‑state portion of each rollout is then computed per gait. The left panel shows the resulting cost–velocity curves for purely forward motion (v<sub>y</sub>=0, &psi;&#775;=0), while the right panel shows the same analysis when a lateral velocity component is added (v<sub>y</sub>=0.3 m/s, &psi;&#775;=0). 
+
+            The results show a clear dependence of energy efficiency on gait choice, with pacing exhibiting the lowest cost of transport across the tested velocity range, followed in order by trotting, galloping, pronking, and bounding.
             <span style="font-size: 14px; text-shadow: 0 0 3px rgb(161, 66, 170);">&darr;</span>
           </p>
           <br>
-          <div class="columns is-centered">
+          <!-- <div class="columns is-centered">
             <div class="column is-half has-text-centered">
               <video controls autoplay loop muted playsinline
                 src="assets/resources/sim/videos/diff_gait_eval.mp4"
@@ -266,6 +268,32 @@
               </figure>
               <p>At moderate forward speed (1 m/s) with non-zero lateral velocity (0.3 m/s) and zero yaw, pacing gait is the most energy-efficient, followed by trotting, galloping and bounding gaits. Pronking gait based locomotion performed the worst out of all gaits. Pacing < Trotting < Galloping < Bounding < Pronking</p>
             </div>
+          </div> -->
+          <div class="columns is-centered">
+            <div class="column is-half has-text-centered">
+              <video controls autoplay loop muted playsinline
+                src="assets/resources/sim/videos/diff_gait_eval.mp4"
+                style="border: 1px solid #bbb; border-radius: 10px; width: 100%;">
+              </video>
+            </div>
+          </div>
+          <div class="columns is-centered">
+            <div class="column is-half has-text-centered">
+              <figure class="image">
+                <img src="assets/resources/sim/graphs/norm_cot_vy-0_warm-30.png" 
+                      style="border: 1px solid #bbb; border-radius: 10px; height: 300%; width: 100%;"
+                      alt="gait_graph">
+              </figure>
+              <p>(a) v<sub>x</sub> ∈ [0, 1.8] m/s, v<sub>y</sub> = 0.0 m/s, ψ&#773; = 0 rad/s.</p>
+            </div>
+            <div class="column is-half has-text-centered">
+              <figure class="image">
+                <img src="assets/resources/sim/graphs/norm_cot_vy-0.3_warm-30.png" 
+                      style="border: 1px solid #bbb; border-radius: 10px; height: 300%; width: 100%;"
+                      alt="gait_graph">
+              </figure>
+              <p>(a) v<sub>x</sub> ∈ [0, 1.8] m/s, v<sub>y</sub> = 0.3 m/s, ψ&#773; = 0 rad/s.</p>
+            </div>
           </div>
           <br>
           <p style="text-align: center;">
@@ -279,6 +307,15 @@
                 src="assets/resources/sim/videos/adaptive_vary_lin_vel.mp4"
                 style="border: 1px solid #bbb; border-radius: 10px; width: 100%;">
               </video>
+            </div>
+          </div>
+          <div class="columns is-centered">
+            <div class="column is-half has-text-centered">
+              <figure class="image">
+                <img src="assets/resources/sim/graphs/mean_cot_vary_speed.png" 
+                      style="border: 1px solid #bbb; border-radius: 10px; height: 300%; width: 100%;"
+                      alt="gait_graph">
+              </figure>
             </div>
             <div class="column is-half has-text-centered">
               <figure class="image">
