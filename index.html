@@ -220,18 +220,21 @@
       <p style="text-align: center;">
         All experiments were conducted by reproducing the methodology proposed in 
         <a href="https://arxiv.org/abs/2403.20001">Adaptive Energy Regularization for Autonomous Gait Transition and Energy-Efficient Quadruped Locomotion</a>, adapted to the Aliengo robot platform. 
-        While the original work demonstrates autonomous gait discovery through energy-centric reward shaping, our implementation fixes the gait to pronking and explicitly zeros out high-level gait modulation commands to isolate and evaluate energy-efficient locomotion behavior under a constrained control setting. 
-        The system was evaluated at 
-        <em>x</em><sub>vel</sub> = 1.0 m/s, 
-        <em>y</em><sub>vel</sub> = 0.0 m/s, 
-        <em>yaw</em><sub>vel</sub> = 0.0 rad/s, 
-        body height = 0.0, step frequency = 0.0 Hz, pronking gait, 
-        foot swing height = 0.0 m, pitch = 0.0, roll = 0.0, stance width = 0.0,
-        emphasizing energy-aware locomotion with minimal handcrafted gait biases.
+        The work demonstrates autonomous gait discovery through energy-centric reward shaping, it explicitly zeros out high-level gait modulation commands to isolate and evaluate energy-efficient locomotion behavior under a constrained control setting. 
+        In the left experiment, the policy is evaluated at a constant command of <em>v</em><sub>x</sub> = 1.0 m/s, <em>v</em><sub>y</sub> = 0.0 m/s, and <em>ψ̇</em> = 0.0 rad/s.
+        In the right experiment, the forward velocity command is linearly ramped from 0 to 1.2 m/s over 350 simulation steps, while other gait‑related parameters (body height, step frequency, phase, offset, bound, duration, foot‑swing height, pitch, roll, and stance width) are held at zero, thereby emphasizing energy-aware locomotion with minimal handcrafted gait biases.
         <span style="font-size: 14px; text-shadow: 0 0 3px rgb(161, 66, 170);">&darr;</span>
       </p>
-      <div class="column is-full-width is-centered has-text-centered">
-        <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/adaptive_energy_regularization.mp4" poster="assets/resources/real_world/gif/adaptive_energy_regularization.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 100%"></video>
+      <div class="columns is-centered">
+        <div class="column is-half has-text-centered">
+          <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/adaptive_energy_regularization.mp4" poster="assets/resources/real_world/gif/adaptive_energy_regularization.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 100%"></video>
+          <p></p>
+        </div>
+
+        <div class="column is-half has-text-centered">
+          <video controls autoplay loop muted playsinline src="assets/resources/real_world/videos/adaptive_speed_vary.mp4" poster="assets/resources/real_world/gif/adaptive_speed_vary.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%; width: 100%"></video>
+          <p></p>
+        </div>
       </div>
   </div>
 </section>
@@ -245,7 +248,7 @@
           <p style="text-align: center;">
             The experiment below is conducted in simulation on flat terrain, where five quadruped robots execute different gait patterns under identical control and environmental conditions. 
             
-            For each commanded forward velocity v<sub>x</sub>∈[0,1.8] m/s (10 evenly spaced values), five quadruped instances execute distinct, fixed gait patterns and are simulated for 500 steps. The mean cost of transport E/(mgd) over the steady‑state portion of each rollout is then computed per gait. The left panel shows the resulting cost–velocity curves for purely forward motion (v<sub>y</sub>=0, &psi;&#775;=0), while the right panel shows the same analysis when a lateral velocity component is added (v<sub>y</sub>=0.3 m/s, &psi;&#775;=0). 
+            For each commanded forward velocity v<sub>x</sub>∈[0,1.8] m/s (10 evenly spaced values), five quadruped instances execute distinct, fixed gait patterns and are simulated for 500 steps. The mean cost of transport E/(mgd) over the steady‑state portion of each rollout is then computed per gait. The left panel shows the resulting cost-velocity curves for purely forward motion (v<sub>y</sub>=0, &psi;&#775;=0), while the right panel shows the same analysis when a lateral velocity component is added (v<sub>y</sub>=0.3 m/s, &psi;&#775;=0). 
 
             The results show a clear dependence of energy efficiency on gait choice, with pacing exhibiting the lowest cost of transport across the tested velocity range, followed in order by trotting, galloping, pronking, and bounding.
             <span style="font-size: 14px; text-shadow: 0 0 3px rgb(161, 66, 170);">&darr;</span>
@@ -292,7 +295,7 @@
                       style="border: 1px solid #bbb; border-radius: 10px; height: 300%; width: 100%;"
                       alt="gait_graph">
               </figure>
-              <p>(a) v<sub>x</sub> ∈ [0, 1.8] m/s, v<sub>y</sub> = 0.3 m/s, ψ&#773; = 0 rad/s.</p>
+              <p>(b) v<sub>x</sub> ∈ [0, 1.8] m/s, v<sub>y</sub> = 0.3 m/s, ψ&#773; = 0 rad/s.</p>
             </div>
           </div>
           <br>
